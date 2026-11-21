@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#251c1a">
+  <meta name="description" content="Bizim Dönerci Musa Usta menüsü. Et döner ve tavuk döner çeşitleri ile güncel fiyatlar.">
+  <title>Bizim Dönerci Musa Usta | Menü</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #251c1a;
+      --muted: #776d66;
+      --paper: #fbf6ee;
+      --card: #fffdf9;
+      --red: #9f3025;
+      --red-dark: #78251e;
+      --gold: #e8b64e;
+      --line: #eadfd0;
+      --shadow: 0 8px 24px rgba(49, 31, 24, .07);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: ui-rounded, "Arial Rounded MT Bold", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: calc(90px + env(safe-area-inset-bottom));
+    }
+    button, a { font: inherit; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: #fffaf1;
+      background:
+        radial-gradient(ellipse at 88% 5%, rgba(232,182,78,.24), transparent 38%),
+        linear-gradient(140deg, #38231e 0%, #251c1a 58%, #191513 100%);
+      padding: max(28px, env(safe-area-inset-top)) 22px 29px;
+      border-bottom: 4px solid var(--gold);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 210px; height: 210px;
+      border: 1px solid rgba(255,250,241,.10);
+      border-radius: 50%;
+      right: -76px; bottom: -126px;
+      box-shadow: 0 0 0 17px rgba(255,250,241,.035), 0 0 0 34px rgba(255,250,241,.025);
+      pointer-events: none;
+    }
+    .hero-inner, main, .footer-inner { width: min(100%, 760px); margin: 0 auto; }
+    .brandline {
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+      margin-bottom: 13px;
+    }
+    h1 {
+      margin: 0;
+      max-width: 560px;
+      font-size: clamp(31px, 8vw, 48px);
+      line-height: .99;
+      letter-spacing: -.045em;
+      font-weight: 950;
+    }
+    h1 span { display: block; color: var(--gold); margin-top: 5px; }
+    .hero-note { margin: 15px 0 0; color: rgba(255,250,241,.78); font-size: 14px; }
+    .phone-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; position: relative; z-index: 1; }
+    .phone-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 13px; border: 1px solid rgba(255,250,241,.24);
+      border-radius: 999px; color: #fffaf1; text-decoration: none;
+      background: rgba(255,255,255,.07); font-size: 13px; font-weight: 750;
+      min-height: 42px;
+    }
+    .phone-link:active { background: rgba(255,255,255,.16); }
+    .phone-icon { color: var(--gold); font-size: 16px; }
+    main { padding: 21px 16px 26px; }
+    .intro { display: flex; align-items: end; justify-content: space-between; gap: 10px; margin: 0 3px 14px; }
+    .intro h2 { margin: 0; font-size: 23px; letter-spacing: -.035em; }
+    .intro p { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+    .currency-note { color: var(--muted); font-size: 11px; white-space: nowrap; padding-bottom: 3px; }
+    .filters { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 13px; scrollbar-width: none; }
+    .filters::-webkit-scrollbar { display: none; }
+    .filter {
+      flex: 0 0 auto; min-height: 40px; padding: 0 16px; border: 1px solid var(--line);
+      border-radius: 999px; background: var(--card); color: var(--ink); font-weight: 800; font-size: 13px;
+      cursor: pointer; transition: background .16s ease, color .16s ease, border-color .16s ease;
+    }
+    .filter[aria-pressed="true"] { background: var(--red); color: white; border-color: var(--red); }
+    .section { margin-top: 10px; }
+    .section-title { display: flex; align-items: center; gap: 10px; margin: 12px 3px 11px; }
+    .section-title h3 { margin: 0; font-size: 18px; letter-spacing: -.025em; }
+    .section-title .rule { height: 1px; background: var(--line); flex: 1; }
+    .section-mark { width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; background: #f2e3d1; color: var(--red); font-size: 15px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+    .item {
+      min-width: 0; background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      padding: 14px 13px 12px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between;
+      min-height: 119px;
+    }
+    .item-name { font-size: 15px; line-height: 1.25; letter-spacing: -.02em; font-weight: 850; overflow-wrap: anywhere; }
+    .item-type { margin-top: 6px; color: var(--muted); font-size: 11px; font-weight: 650; }
+    .prices { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 13px; }
+    .price {
+      display: inline-flex; align-items: baseline; gap: 4px; color: var(--red-dark); font-weight: 950;
+      font-size: 20px; letter-spacing: -.04em; white-space: nowrap;
+    }
+    .price small { color: var(--muted); font-size: 10px; font-weight: 750; letter-spacing: 0; }
+    .price.single { font-size: 22px; }
+    .price-option {
+      display: flex; flex-direction: column; gap: 1px; padding: 5px 8px;
+      border-radius: 9px; background: #f8eee2; min-width: 67px;
+    }
+    .price-option small { color: var(--muted); font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+    .price-option strong { color: var(--red-dark); font-size: 17px; line-height: 1.1; letter-spacing: -.03em; }
+    .footnote { color: var(--muted); font-size: 11px; text-align: center; margin: 18px 4px 0; }
+    .bottom-bar {
+      position: fixed; z-index: 5; left: 0; right: 0; bottom: 0;
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+      background: rgba(251,246,238,.94); border-top: 1px solid var(--line); backdrop-filter: blur(12px);
+    }
+    .bottom-inner { width: min(100%, 760px); margin: 0 auto; display: flex; gap: 9px; }
+    .bottom-title { display: none; }
+    .call-button {
+      flex: 1; display: flex; justify-content: center; align-items: center; gap: 8px; min-height: 48px;
+      border-radius: 13px; background: var(--red); color: white; text-decoration: none; font-weight: 850; font-size: 14px;
+      box-shadow: 0 5px 15px rgba(159,48,37,.2);
+    }
+    .call-button.secondary { color: var(--red); background: #f3e6d6; box-shadow: none; }
+    .call-button:active { transform: translateY(1px); }
+    .footer { text-align: center; color: var(--muted); font-size: 11px; padding: 0 15px 18px; }
+    [hidden] { display: none !important; }
+    @media (min-width: 600px) {
+      body { padding-bottom: 30px; }
+      .hero { padding-top: 38px; padding-bottom: 35px; }
+      main { padding: 27px 22px 30px; }
+      .grid { gap: 14px; }
+      .item { padding: 17px; min-height: 130px; }
+      .item-name { font-size: 17px; }
+      .bottom-bar { position: static; background: transparent; border: 0; padding: 0 22px 22px; }
+      .bottom-inner { background: #f1e5d7; padding: 12px; border-radius: 16px; }
+      .bottom-title { display: block; align-self: center; margin-right: auto; color: var(--ink); font-size: 13px; font-weight: 800; }
+      .call-button { flex: 0 0 auto; min-width: 176px; }
+    }
+    @media (max-width: 365px) {
+      main { padding-left: 12px; padding-right: 12px; }
+      .grid { grid-template-columns: 1fr; }
+      .item { min-height: 103px; }
+      .hero { padding-left: 18px; padding-right: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="brandline">Döner • Dürüm • Ustalık</div>
+      <h1>BİZİM DÖNERCİ <span>MUSA USTA</span></h1>
+      <p class="hero-note">Menümüzü inceleyin, arayarak sipariş verin.</p>
+      <div class="phone-row" aria-label="Telefon numaraları">
+        <a class="phone-link" href="tel:+902322611184"><span class="phone-icon" aria-hidden="true">☎</span> 0232 261 11 84</a>
+        <a class="phone-link" href="tel:+905528611184"><span class="phone-icon" aria-hidden="true">☎</span> 0552 861 11 84</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section aria-labelledby="menu-heading">
+      <div class="intro">
+        <div>
+          <h2 id="menu-heading">Menümüz</h2>
+          <p>Canınız hangisini çekti?</p>
+        </div>
+        <span class="currency-note">Fiyatlar ₺</span>
+      </div>
+      <div class="filters" role="group" aria-label="Menüyü filtrele">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">Tümü</button>
+        <button class="filter" type="button" data-filter="et" aria-pressed="false">Et döner</button>
+        <button class="filter" type="button" data-filter="tavuk" aria-pressed="false">Tavuk döner</button>
+      </div>
+
+      <section class="section" data-section="et" aria-labelledby="et-heading">
+        <div class="section-title"><span class="section-mark" aria-hidden="true">◆</span><h3 id="et-heading">Et Döner</h3><span class="rule"></span></div>
+        <div class="grid">
+          <article class="item"><div><div class="item-name">İskender Et Döner</div><div class="item-type">Et döner</div></div><div class="prices"><span class="price single">450 <small>₺</small></span></div></article>
+          <article class="item"><div><div class="item-name">Pilav Üstü Et Döner</div><div class="item-type">Et döner</div></div><div class="prices"><span class="price single">450 <small>₺</small></span></div></article>
+          <article class="item"><div><div class="item-name">Bazlama Et Döner</div><div class="item-type">Et döner</div></div><div class="prices"><span class="price single">280 <small>₺</small></span></div></article>
+          <article class="item"><div><div class="item-name">Hamburger Et Döner</div><div class="item-type">Et döner</div></div><div class="prices"><span class="price single">270 <small>₺</small></span></div></article>
+          <article class="item"><div><div class="item-name">Dürüm Et Döner</div><div class="item-type">Tek / çift dürüm seçeneği</div></div><div class="prices"><span class="price-option"><small>Tek dürüm</small><strong>270 ₺</strong></span><span class="price-option"><small>Çift dürüm</small><strong>280 ₺</strong></span></div></article>
+          <article class="item"><div><div class="item-name">Özel Y. Ekmek Et Döner</div><div class="item-type">Et döner</div></div><div class="prices"><span class="price single">270 <small>₺</small></span></div></article>
+        </div>
+      </section>
+
+      <section class="section" data-section="tavuk" aria-labelledby="tavuk-heading">
+        <div class="section-title"><span class="section-mark" aria-hidden="true">✦</span><h3 id="tavuk-heading">Tavuk Döner</h3><span class="rule"></span></div>
+        <div class="grid">
+          <article class="item"><div><div class="item-name">İskender Tavuk Döner</div><div class="item-type">Tavuk döner</div></div><div class="prices"><span class="price single">300 <small>₺</small></span></div></article>
+          <article class="item"><div><div class="item-name">Pilav Üstü Tavuk Döner</div><div class="item-type">Tavuk döner</div></div><div class="prices"><span class="price single">300 <small>₺</small></span></div></article>
+          <article class="item"><div><div class="item-name">Bazlama Tavuk Döner</div><div class="item-type">Tavuk döner</div></div><div class="prices"><span class="price single">180 <small>₺</small></span></div></article>
+          <article class="item"><div><div class="item-name">Özel Y. Ekmek Tavuk Döner</div><div class="item-type">Tavuk döner</div></div><div class="prices"><span class="price single">170 <small>₺</small></span></div></article>
+          <article class="item"><div><div class="item-name">Dürüm Tavuk Döner</div><div class="item-type">Tek / çift dürüm seçeneği</div></div><div class="prices"><span class="price-option"><small>Tek dürüm</small><strong>170 ₺</strong></span><span class="price-option"><small>Çift dürüm</small><strong>180 ₺</strong></span></div></article>
+          <article class="item"><div><div class="item-name">Hamburger Döner</div><div class="item-type">Tavuk döner</div></div><div class="prices"><span class="price single">170 <small>₺</small></span></div></article>
+        </div>
+      </section>
+      <p class="footnote">Ürün ve fiyat bilgileri mekândaki menü fotoğrafına göre hazırlanmıştır.</p>
+    </section>
+  </main>
+
+  <div class="bottom-bar" aria-label="Telefonla sipariş">
+    <div class="bottom-inner">
+      <span class="bottom-title">Telefonla sipariş</span>
+      <a class="call-button" href="tel:+902322611184" aria-label="0232 261 11 84 numarasını ara">☎ <span>0232 261 11 84</span></a>
+      <a class="call-button secondary" href="tel:+905528611184" aria-label="0552 861 11 84 numarasını ara">☎ <span>0552 861 11 84</span></a>
+    </div>
+  </div>
+  <footer class="footer">Bizim Dönerci Musa Usta</footer>
+
+  <script>
+    (() => {
+      const buttons = [...document.querySelectorAll('.filter')];
+      const sections = [...document.querySelectorAll('[data-section]')];
+      buttons.forEach(button => button.addEventListener('click', () => {
+        const selected = button.dataset.filter;
+        buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        sections.forEach(section => {
+          section.hidden = selected !== 'all' && section.dataset.section !== selected;
+        });
+      }));
+    })();
+  </script>
+</body>
+</html>
